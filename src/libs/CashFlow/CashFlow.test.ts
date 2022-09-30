@@ -10,7 +10,7 @@ describe('CashFlow Lib Unit Test', ()=>{
         const cashFlowItem : ICashFlow = {
             type: 'INCOME',
             date: new Date(),
-            anount: 100,
+            amount: 100,
             description: 'Receipt A101 from SW'
         };
         const index = cashFlowInstance.addCashFlow(cashFlowItem);
