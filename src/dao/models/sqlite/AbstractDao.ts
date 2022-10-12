@@ -30,15 +30,15 @@ export abstract class AbstractDao <T> implements IDaoObject {
         await this.connection.run(sqlInsert, values);
         return data;
     }
-    public async update(identifier: Partial<T>, data: Partial<T>): Promise<boolean>{
+    public async update(identifier: Partial<T>, data: Partial<T>):Promise<boolean> {
         // UPDATE TABLE_NAME SET ...COLUMNS=?, WHERE ..IDENTIFIERS=?;
         const {columns, values, params:_params} = this.getColValParmArr(data);
         const {columns:columnsId, values:valuesId, params:_paramsId} = this.getColValParmArr(identifier);
         const finalValues = [...values, ...valuesId];
-        const sqlUpdate = `UPDATE ${this.persistanceName} SET ${columns.map((o)=>`${o}=?`).join(' ')} WHERE ${columnsId.map((o)=>`${o}=?`).join(' ')};`;
+        const sqlUpdate = `UPDATE ${this.persistanceName} SET ${columns.map((o)=>`${o}=?`).join(', ')} WHERE ${columnsId.map((o)=>`${o}=?`).join(' ')};`;
         await this.connection.run(sqlUpdate, finalValues);
         return true;
-    }
+      }
     public async delete(identifier: Partial<T>): Promise<boolean>{
         const {columns, values, params: _params} = this.getColValParmArr(identifier);
         const sqlDelete = `DELETE from ${this.persistanceName} where ${columns.map(o=>`${o}=?`).join(' and ')};`;

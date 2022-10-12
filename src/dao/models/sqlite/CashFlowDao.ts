@@ -36,12 +36,12 @@ export class CashFlowDao extends AbstractDao<ICashFlow>{
       }
     }
 
-    public async updateNewCashFlow( updateCashFlow: ICashFlow) {
-      try{
+    public async updateCashFlow( updateCashFlow: ICashFlow) {
+      try {
         const {_id, ...updateObject} = updateCashFlow;
         const result = await super.update({_id}, updateObject);
         return result;
-      }catch( ex: unknown) {
+      } catch( ex: unknown) {
         console.log("CashFlowDao sqlite:", (ex as Error).message);
         throw ex;
       }
