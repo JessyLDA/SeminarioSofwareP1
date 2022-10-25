@@ -5,7 +5,7 @@ import { commonValidator, validateInput } from '@server/utils/validator';
 const router = Router();
 const cashFlowInstance = new CashFlow("MONGODB");
 
-router.get('/', async (_req, res)=>{
+router.get('/', [m1, m2, m3] async (_req, res)=>{
   try {
     res.json(await cashFlowInstance.getAllCashFlow());
   } catch (ex) {
